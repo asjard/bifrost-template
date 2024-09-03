@@ -21,6 +21,8 @@ CGO_ENABLED ?= 0
 ##env 编译目录
 BUILD_DIR ?= ./
 
+##env 项目名称
+PROJECT_NAME ?= bifrost
 ##env 部署环境,可选:dev,sit,uat,pro
 DEPLOY_ENV ?= dev
 ##env 服务名称
@@ -91,6 +93,13 @@ uninstall: all_env $(BIFROST_DIR)/05_uninstall.yaml ## 卸载
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	05_uninstall.yaml
+
+run: build Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-compose
+	docker-compose -p $(PROJECT_NAME) build
+	docker-compose -p $(PROJECT_NAME) up -d
+
+down: docker-compose.yaml ## 本地卸载,依赖docker-compose
+	docker-compose -p $(PROJECT_NAME) down
 
 test: ## 运行测试用例
 	go test -race -cover -coverprofile=cover.out $$(go list ./...|grep -v cmd|grep -v 'protobuf/')
