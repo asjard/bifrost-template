@@ -60,7 +60,7 @@ help: ## 使用帮助
 	@make env
 
 build: ## 编译
-	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 go build -ldflags "-s -w" -o $(SERVICE_NAME) $(BUILD_DIR)
+	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 go build -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
 
 archive: ## 打包
 
