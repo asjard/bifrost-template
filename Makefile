@@ -26,9 +26,6 @@ DEPLOY_ENV ?= dev
 ##env 服务名称
 SERVICE_NAME ?= bifrost
 
-## 所有环境变量
-# ALL_ENV := "$$(cat Makefile |grep -v '^$$'|grep -A1 '^\#\#env'|awk '/\#\#env/{getline a;print a}'|sed 's/ .*=/=/'|sed 's/ .*=/=/'|sed 's/ //g'|sed -e 's/^\(.*\)=.*/\1="$$\(\1\)"/'|tr '\r\n' ' ')"
-
 all: help
 
 ## 自动生成的环境变量
