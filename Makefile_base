@@ -17,7 +17,6 @@ all_env:
 	tr '\r\n' ' ')" > Makefile_gen_all_env
 
 help: ## 使用帮助
-	@echo $(MAKEFILE_LIST)
 	@echo "Commands:"
 	@echo "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/  \\033[35m\1\\033[m:\2/' | column -c2 -t -s :)"
 	@echo "Envs:"
