@@ -28,7 +28,7 @@ DEPLOY_ENV ?= dev
 ##env 服务名称
 SERVICE_NAME ?= bifrost
 
--include Makefile_base
+-include $(BIFROST_DIR)/Makefile_base
 
 build: ## 编译
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 go build -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
