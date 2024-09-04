@@ -1,0 +1,32 @@
+all: help
+
+## 自动生成的环境变量
+-include Makefile_gen
+-include Makefile_gen_all_env
+
+all_env:
+	@echo "## AUTO GENERATED DO NOT EDIT IT.\nexport ALL_ENV := $$(cat $(MAKEFILE_LIST) |\
+	grep -v '^$$'|\
+	grep -A1 -E '^##env'|\
+	awk '/\#\#env/{getline a;print a}'|\
+	sed 's/export//'|\
+	sed 's/^ //'| \
+	sed -e 's/[ ]*.=/=/' -e 's/^\(.*\)=.*/\1="$$\(\1\)"/'|\
+	tr '\r\n' ' ')" > Makefile_gen_all_env
+
+help: ## 使用帮助
+	@echo $(MAKEFILE_LIST)
+	@echo "Commands:"
+	@echo "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/  \\033[35m\1\\033[m:\2/' | column -c2 -t -s :)"
+	@echo "Envs:"
+	@echo "## AUTO GENERATED DO NOT EDIT IT.\nenv: \n$$(cat $(MAKEFILE_LIST) | \
+	grep -v '^$$' | \
+	grep -A1 -E '^##env' |\
+	sed 's/##env//' |\
+	sed 's/export//'|\
+	sed 's/^ //'| \
+	sed 'N;s/\n/ =/'|\
+	awk -F '=' '{print $$2"|"$$1"|默认:"$$3}' | \
+	sed -e 's/[ ]*.|/|/' -e 's/^\(.\+\)|\(.*\)|\(.*\)/	@echo  \"  \\033[32m\1\\033[m|\2|\3 |当前: $$(\1)\"/' |\
+	column -c2 -t -s '|')" > Makefile_gen
+	@make env

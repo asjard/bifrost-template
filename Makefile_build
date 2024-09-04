@@ -28,36 +28,7 @@ DEPLOY_ENV ?= dev
 ##env 服务名称
 SERVICE_NAME ?= bifrost
 
-all: help
-
-## 自动生成的环境变量
--include Makefile_gen
--include Makefile_gen_all_env
-
-all_env:
-	@echo "## AUTO GENERATED DO NOT EDIT IT.\nALL_ENV := $$(cat $(MAKEFILE_LIST) |\
-	grep -v '^$$'|\
-	grep -A1 '^\#\#env'|\
-	awk '/\#\#env/{getline a;print a}'|\
-	sed 's/ .*=/=/'|\
-	sed 's/ .*=/=/'|\
-	sed 's/ //g'|\
-	sed -e 's/^\(.*\)=.*/\1="$$\(\1\)"/'|\
-	tr '\r\n' ' ')" > Makefile_gen_all_env
-
-help: ## 使用帮助
-	@echo "Commands:"
-	@echo "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/  \\033[35m\1\\033[m:\2/' | column -c2 -t -s :)"
-	@echo "Envs:"
-	@echo "## AUTO GENERATED DO NOT EDIT IT.\nenv: \n$$(cat $(MAKEFILE_LIST) | \
-	grep -v '^$$' | \
-	grep -A1 -E '^##env' |\
-	sed 's/##env//' |\
-	sed 'N;s/\n/ =/'|\
-	awk -F '=' '{print $$2"|"$$1"|默认:"$$3}' | \
-	sed -e 's/ .|/|/' -e 's/^\(.\+\)|\(.*\)|\(.*\)/	@echo  \"  \\033[32m\1\\033[m|\2|\3 |当前: $$(\1)\"/' |\
-	column -c2 -t -s '|')" > Makefile_gen
-	@make env
+-include Makefile_base
 
 build: ## 编译
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 go build -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
