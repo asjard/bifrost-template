@@ -1,3 +1,5 @@
+-include $(BIFROST_DIR)/Makefile_env
+
 all: help
 
 ## 自动生成的环境变量
