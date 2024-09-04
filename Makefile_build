@@ -70,7 +70,7 @@ run: build Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-
 	docker-compose -p $(PROJECT_NAME) up -d
 
 down: docker-compose.yaml ## 本地卸载,依赖docker-compose
-	docker-compose -p $(PROJECT_NAME) down
+	docker-compose -p $(PROJECT_NAME) down $(SERVICE_NAME)
 
 test: ## 运行测试用例
 	go test -race -cover -coverprofile=cover.out $$(go list ./...|grep -v cmd|grep -v 'protobuf/')
