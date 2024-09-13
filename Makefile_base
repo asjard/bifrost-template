@@ -10,6 +10,7 @@ all_env:
 	@echo "## AUTO GENERATED DO NOT EDIT IT.\nexport ALL_ENV := $$(cat $(MAKEFILE_LIST) |\
 	grep -v '^$$'|\
 	grep -A1 -E '^##env'|\
+	grep -v '\-\-' |\
 	awk '/\#\#env/{getline a;print a}'|\
 	sed 's/export//'|\
 	sed 's/^ //'| \
@@ -23,6 +24,7 @@ help: ## 使用帮助
 	@echo "## AUTO GENERATED DO NOT EDIT IT.\nenv: \n$$(cat $(MAKEFILE_LIST) | \
 	grep -v '^$$' | \
 	grep -A1 -E '^##env' |\
+	grep -v '\-\-' |\
 	sed 's/##env//' |\
 	sed 's/export//'|\
 	sed 's/^ //'| \
