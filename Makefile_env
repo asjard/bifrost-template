@@ -1,5 +1,7 @@
 ##env 当前项目所在目录,结尾不要有/
 BIFROST_DIR ?= .
+##env proto协议文件目录,结尾不要有/
+PROTO_DIR ?= .
 ##env 是否根据protobuf文件生成*.pb.go文件
 GEN_PROTO_GO ?= true
 ##env 是否根据protobuf文件生成*_grpc.pb.go文件
@@ -14,15 +16,15 @@ GEN_PROTO_TS ?= false
 GEN_PROTO_GO_ASYNQ ?= false
 ##env 是否根据protobuf文件生成*_validate.pb.go文件
 GEN_PROTO_GO_VALIDATE ?= false
-##env protobuf所在目录
-PROTO_DIR ?= ./protobuf
 
 ##env 运行环境,可选:linux,darwin,windows
 GOOS ?= linux
 ##env 是否开启CGO,可选:0,1
 CGO_ENABLED ?= 0
 ##env 编译目录
-BUILD_DIR ?= ./
+BUILD_DIR ?= .
+##env 是否开启DEBUG
+DEBUG ?= false
 
 ##env 项目名称
 PROJECT_NAME ?= bifrost

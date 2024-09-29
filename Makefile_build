@@ -1,7 +1,21 @@
 -include $(BIFROST_DIR)/Makefile_base
 
+## bash命令
+BASH_CMD = bash
+## go buid命令
+GOBUILD_CMD = go build
+
+## 开启DEBUG
+ifeq ($(DEBUG),true)
+    BASH_CMD = bash -x
+    GOBUILD_CMD = go build -v
+endif
+
 build: ## 编译
-	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 go build -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
+	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
+
+gen_proto: $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
+	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/gen_proto.sh
 
 archive: ## 打包
 

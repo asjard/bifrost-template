@@ -17,6 +17,8 @@ all_env:
 	sed -e 's/[ ]*.=/=/' -e 's/^\(.*\)=.*/\1="$$\(\1\)"/'|\
 	tr '\r\n' ' ')" > Makefile_gen_all_env
 
+configure: all_env help ## 配置
+
 help: ## 使用帮助
 	@echo "Commands:"
 	@echo "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/  \\033[35m\1\\033[m:\2/' | column -c2 -t -s :)"
