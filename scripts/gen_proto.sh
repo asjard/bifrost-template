@@ -8,39 +8,38 @@ if [ ! -d "$PROTO_DIR" ];then
 fi
 
 protoc_out=
-out_dir=${PROTO_DIR}/..
 
 go_out() {
-    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=./.."
 }
 
 ts_out() {
-    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${out_dir}"
+    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=./.."
 }
 
 go_grpc_out(){
     go_out
-    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=./.."
 }
 
 go_rest_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=./.."
 }
 
 go_asynq_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=./.."
 }
 
 go_validate_out() {
     go_out
-    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=./.."
 }
 
 go_rest_gw_out() {
     go_rest_out
-    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=${out_dir}"
+    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=./.."
 }
 
 if [  "$GEN_PROTO_GO" == "true" ];then
@@ -86,7 +85,7 @@ do
         ${clang_format} -i $file
     fi
     protoc ${protoc_out} \
-        -I${PROTO_DIR}/third_party \
+        -I./third_party \
         -I. \
         $file
 done
