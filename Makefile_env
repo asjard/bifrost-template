@@ -15,7 +15,7 @@ GEN_PROTO_TS ?= false
 ##env 是否根据protobuf文件生成*_asynq.pb.go文件
 GEN_PROTO_GO_ASYNQ ?= false
 ##env 是否根据protobuf文件生成*_validate.pb.go文件
-GEN_PROTO_GO_VALIDATE ?= false
+GEN_PROTO_GO_VALIDATE ?= true
 
 ##env 运行环境,可选:linux,darwin,windows
 GOOS ?= linux
