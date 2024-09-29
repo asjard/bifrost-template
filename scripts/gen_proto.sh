@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+ROOTDIR=$(cd $(dirname $0);pwd)
 PROTO_DIR=${PROTO_DIR:-"."}
 
 if [ ! -d "$PROTO_DIR" ];then
@@ -73,7 +74,7 @@ fi
 clang_format=$(which clang-format)
 
 ## 清理生成的文件
-${ROOTDIR}/clean_proto.sh
+bash ${ROOTDIR}/clean_proto.sh
 
 cd $PROTO_DIR
 
