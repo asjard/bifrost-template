@@ -17,6 +17,9 @@ build: ## 编译
 gen_proto: $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
 	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/gen_proto.sh
 
+clean_proto: $(BIFROST_DIR)/scripts/clean_proto.sh ## 清理proto协议生成的文件
+	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/clean_proto.sh
+
 archive: ## 打包
 
 install: all_env $(BIFROST_DIR)/01_install.yaml ## 安装

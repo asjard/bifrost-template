@@ -72,12 +72,10 @@ fi
 
 clang_format=$(which clang-format)
 
-cd $PROTO_DIR
+## 清理生成的文件
+${ROOTDIR}/clean_proto.sh
 
-for file in $(find . -type f -name "*.pb.go" -o -name '*.d.ts'|grep -v 'third_party')
-do
-    rm -rf $file
-done
+cd $PROTO_DIR
 
 for file in $(find . -type f -name "*.proto" |grep -v 'third_party')
 do
