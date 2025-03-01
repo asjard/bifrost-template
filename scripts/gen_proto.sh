@@ -11,36 +11,36 @@ fi
 protoc_out=
 
 go_out() {
-    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=./.."
+    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=${GEN_PROTO_GO_OUT}"
 }
 
 ts_out() {
-    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=./.."
+    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${GEN_PROTO_TS_OUT}"
 }
 
 go_grpc_out(){
     go_out
-    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=./.."
+    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=${GEN_PROTO_GO_OUT}"
 }
 
 go_rest_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=./.."
+    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=${GEN_PROTO_GO_OUT}"
 }
 
 go_asynq_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=./.."
+    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=${GEN_PROTO_GO_OUT}"
 }
 
 go_validate_out() {
     go_out
-    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=./.."
+    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=${GEN_PROTO_GO_OUT}"
 }
 
 go_rest_gw_out() {
     go_rest_out
-    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=./.."
+    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=${GEN_PROTO_GO_OUT}"
 }
 
 if [  "$GEN_PROTO_GO" == "true" ];then
@@ -74,7 +74,7 @@ fi
 clang_format=$(which clang-format)
 
 ## 清理生成的文件
-bash ${ROOTDIR}/clean_proto.sh
+bash -x ${ROOTDIR}/clean_proto.sh
 
 cd $PROTO_DIR
 

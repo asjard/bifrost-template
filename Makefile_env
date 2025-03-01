@@ -4,14 +4,18 @@ BIFROST_DIR ?= .
 PROTO_DIR ?= .
 ##env 是否根据protobuf文件生成*.pb.go文件
 GEN_PROTO_GO ?= true
+##env 生成的*.pb.go文件输出目录
+GEN_PROTO_GO_OUT ?= ./..
 ##env 是否根据protobuf文件生成*_grpc.pb.go文件
 GEN_PROTO_GO_GRPC ?= true
 ##env 是否根据protobuf文件生成*_rest.pb.go文件
 GEN_PROTO_GO_REST ?= true
 ##env 是否根据protobuf文件生成*_rest_gw.pb.go文件
 GEN_PROTO_GO_REST_GW ?= true
-##env 是否根据protobuf文件生成*_ts.pb.go文件
+##env 是否根据protobuf文件生成*.pb.tsx文件
 GEN_PROTO_TS ?= false
+##env 生成的*.pb.ts文件输出目录
+GEN_PROTO_TS_OUT ?= ./..
 ##env 是否根据protobuf文件生成*_asynq.pb.go文件
 GEN_PROTO_GO_ASYNQ ?= false
 ##env 是否根据protobuf文件生成*_validate.pb.go文件

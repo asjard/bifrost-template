@@ -3,14 +3,18 @@
 
 PROTO_DIR=${PROTO_DIR:-"."}
 
-if [ ! -d "$PROTO_DIR" ];then
-    echo "proto dir '$PROTO_DIR' dir not found"
+if [ ! -d "${PROTO_DIR}/${GEN_PROTO_GO_OUT}" ];then
+    echo "'${PROTO_DIR}/${GEN_PROTO_GO_OUT}' not found"
     exit 1
 fi
 
-cd $PROTO_DIR
+find ${PROTO_DIR}/${GEN_PROTO_GO_OUT} -type f -0 -name "*.pb.go" -delete
 
-for file in $(find . -type f -name "*.pb.go" -o -name '*.d.ts'|grep -v 'third_party')
-do
-    rm -rf $file
-done
+if [ ! -d "${PROTO_DIR}/${GEN_PROTO_TS_OUT}" ];then
+    echo "'${PROTO_DIR}/${GEN_PROTO_TS_OUT}' not found"
+    exit 1
+fi
+
+find ${PROTO_DIR}/${GEN_PROTO_TS_OUT} -type f -name "*.ts" -delete
+
+#
