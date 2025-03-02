@@ -82,7 +82,7 @@ fi
 clang_format=$(which clang-format)
 
 ## 清理生成的文件
-bash -x ${ROOTDIR}/clean_proto.sh
+bash ${ROOTDIR}/clean_proto.sh
 
 cd $PROTO_DIR
 
