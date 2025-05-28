@@ -20,6 +20,8 @@ GEN_PROTO_UMITS ?= fasle
 GEN_PROTO_TS_OUT ?= ./..
 ##env 是否根据protobuf文件生成*_asynq.pb.go文件
 GEN_PROTO_GO_ASYNQ ?= false
+##env 是否根据protobuf文件生成*_rabbitmq.pb.go文件
+GEN_PROTO_GO_RABBITMQ ?= false
 ##env 是否根据protobuf文件生成*_validate.pb.go文件
 GEN_PROTO_GO_VALIDATE ?= true
 

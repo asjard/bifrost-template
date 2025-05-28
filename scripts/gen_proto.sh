@@ -37,6 +37,11 @@ go_asynq_out() {
     [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=${GEN_PROTO_GO_OUT}"
 }
 
+go_rabbitmq_out() {
+    go_grpc_out
+    [[ "$protoc_out" =~ "--go-rabbitmq_out=" ]] || protoc_out="$protoc_out --go-rabbitmq_out=${GEN_PROTO_GO_OUT}"
+}
+
 go_validate_out() {
     go_out
     [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=${GEN_PROTO_GO_OUT}"
@@ -61,6 +66,10 @@ fi
 
 if [ "$GEN_PROTO_GO_ASYNQ" == "true" ];then
     go_asynq_out
+fi
+
+if [ "$GEN_PROTO_GO_RABBITMQ" == "true" ];then
+    go_rabbitmq_out
 fi
 
 if [ "$GEN_PROTO_GO_VALIDATE" == "true" ];then
