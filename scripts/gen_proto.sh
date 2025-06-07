@@ -18,12 +18,12 @@ ts_out() {
     [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${GEN_PROTO_TS_OUT}"
 }
 
-enumts_out() {
-    [[ "$protoc_out" =~ "--enumts_out=" ]] || protoc_out="$protoc_out --enumts_out=${GEN_PROTO_TS_OUT}"
+ts_enum_out() {
+    [[ "$protoc_out" =~ "--ts-enum_out=" ]] || protoc_out="$protoc_out --ts-enum_out=${GEN_PROTO_TS_OUT}"
 }
 
-umits_out() {
-    [[ "$protoc_out" =~ "--umits_out=" ]] || protoc_out="$protoc_out --umits_out=${GEN_PROTO_TS_OUT}"
+ts_umi_out() {
+    [[ "$protoc_out" =~ "--ts-umi_out=" ]] || protoc_out="$protoc_out --ts-umi_out=${GEN_PROTO_TS_OUT}"
 }
 
 go_grpc_out(){
@@ -88,12 +88,12 @@ if [ "$GEN_PROTO_TS" == "true" ];then
     ts_out
 fi
 
-if [ "$GEN_PROTO_ENUMTS" == "true" ];then
-    enumts_out
+if [ "$GEN_PROTO_TS_ENUM" == "true" ];then
+    ts_enum_out
 fi
 
-if [ "$GEN_PROTO_UMITS" == "true" ];then
-    umits_out
+if [ "$GEN_PROTO_TS_UMI" == "true" ];then
+    ts_umi_out
 fi
 
 clang_format=$(which clang-format)
