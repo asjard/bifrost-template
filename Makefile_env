@@ -14,6 +14,8 @@ GEN_PROTO_GO_REST ?= true
 GEN_PROTO_GO_REST_GW ?= true
 ##env 是否根据protobuf文件生成*.d.tsx文件
 GEN_PROTO_TS ?= false
+##env 是否根据protobuf文件生成*.enum.tsx文件
+GEN_PROTO_ENUMTS ?= false
 ##env 是否根据protobuf生成*.umi.tsx文件
 GEN_PROTO_UMITS ?= fasle
 ##env 生成的*.pb.ts文件输出目录

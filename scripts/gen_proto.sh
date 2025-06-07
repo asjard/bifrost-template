@@ -18,6 +18,10 @@ ts_out() {
     [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${GEN_PROTO_TS_OUT}"
 }
 
+enumts_out() {
+    [[ "$protoc_out" =~ "--enumts_out=" ]] || protoc_out="$protoc_out --enumts_out=${GEN_PROTO_TS_OUT}"
+}
+
 umits_out() {
     [[ "$protoc_out" =~ "--umits_out=" ]] || protoc_out="$protoc_out --umits_out=${GEN_PROTO_TS_OUT}"
 }
@@ -82,6 +86,10 @@ fi
 
 if [ "$GEN_PROTO_TS" == "true" ];then
     ts_out
+fi
+
+if [ "$GEN_PROTO_ENUMTS" == "true" ];then
+    enumts_out
 fi
 
 if [ "$GEN_PROTO_UMITS" == "true" ];then
