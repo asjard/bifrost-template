@@ -11,49 +11,49 @@ fi
 protoc_out=
 
 go_out() {
-    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go_out=" ]] || protoc_out="$protoc_out --go_out=${GEN_PROTO_GO_OUT} --go_opt=${GEN_PROTO_GO_OPT}"
 }
 
 ts_out() {
-    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${GEN_PROTO_TS_OUT}"
+    [[ "$protoc_out" =~ "--ts_out=" ]] || protoc_out="$protoc_out --ts_out=${GEN_PROTO_TS_OUT} --ts_opt=${GEN_PROTO_TS_OPT}"
 }
 
 ts_enum_out() {
-    [[ "$protoc_out" =~ "--ts-enum_out=" ]] || protoc_out="$protoc_out --ts-enum_out=${GEN_PROTO_TS_OUT}"
+    [[ "$protoc_out" =~ "--ts-enum_out=" ]] || protoc_out="$protoc_out --ts-enum_out=${GEN_PROTO_TS_OUT} --ts-enum_opt=${GEN_PROTO_TS_ENUM_OPT}"
 }
 
 ts_umi_out() {
-    [[ "$protoc_out" =~ "--ts-umi_out=" ]] || protoc_out="$protoc_out --ts-umi_out=${GEN_PROTO_TS_OUT}"
+    [[ "$protoc_out" =~ "--ts-umi_out=" ]] || protoc_out="$protoc_out --ts-umi_out=${GEN_PROTO_TS_OUT} --ts-umi_opt=${GEN_PROTO_TS_UMI_OPT}"
 }
 
 go_grpc_out(){
     go_out
-    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-grpc_out=" ]] || protoc_out="$protoc_out --go-grpc_out=${GEN_PROTO_GO_OUT} --go-grpc_opt=${GEN_PROTO_GO_GRPC_OPT}"
 }
 
 go_rest_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-rest_out=" ]] || protoc_out="$protoc_out --go-rest_out=${GEN_PROTO_GO_OUT} --go-rest_opt=${GEN_PROTO_GO_REST_OPT}"
 }
 
 go_asynq_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-asynq_out=" ]] || protoc_out="$protoc_out --go-asynq_out=${GEN_PROTO_GO_OUT} --go-asynq_opt=${GEN_PROTO_GO_ASYNQ_OPT}"
 }
 
 go_rabbitmq_out() {
     go_grpc_out
-    [[ "$protoc_out" =~ "--go-rabbitmq_out=" ]] || protoc_out="$protoc_out --go-rabbitmq_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-rabbitmq_out=" ]] || protoc_out="$protoc_out --go-rabbitmq_out=${GEN_PROTO_GO_OUT} --go-rabbitmq_opt=${GEN_PROTO_GO_RABBITMQ_OPT}"
 }
 
 go_validate_out() {
     go_out
-    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-validate_out=" ]] || protoc_out="$protoc_out --go-validate_out=${GEN_PROTO_GO_OUT} --go-validate_opt=${GEN_PROTO_GO_VALIDATE_OPT}"
 }
 
 go_rest_gw_out() {
     go_rest_out
-    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=${GEN_PROTO_GO_OUT}"
+    [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=${GEN_PROTO_GO_OUT} --go-rest2grpc-gw_opt=${GEN_PROTO_GO_REST_GW_OPT}"
 }
 
 if [  "$GEN_PROTO_GO" == "true" ];then

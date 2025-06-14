@@ -14,7 +14,7 @@ endif
 build: ## 编译
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
 
-gen_proto: $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
+gen_proto: all_env $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
 	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/gen_proto.sh
 
 clean_proto: $(BIFROST_DIR)/scripts/clean_proto.sh ## 清理proto协议生成的文件
@@ -52,7 +52,7 @@ uninstall: all_env $(BIFROST_DIR)/05_uninstall.yaml ## 卸载
 	-i $(BIFROST_DIR)/inventory.ini \
 	05_uninstall.yaml
 
-run: build Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-compose
+run: Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-compose
 	docker-compose -p $(PROJECT_NAME) build
 	docker-compose -p $(PROJECT_NAME) up -d
 
