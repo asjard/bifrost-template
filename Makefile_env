@@ -1,4 +1,4 @@
-##env 当前项目所在目录,结尾不要有/
+##env bifrost项目所在目录,结尾不要有/
 BIFROST_DIR ?= .
 ##env proto协议文件目录,结尾不要有/
 PROTO_DIR ?= .
