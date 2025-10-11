@@ -12,7 +12,7 @@ ifeq ($(DEBUG),true)
 endif
 
 build: ## 编译
-	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE) $(BUILD_DIR)
+	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
 
 gen_proto: all_env $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
 	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/gen_proto.sh
@@ -57,7 +57,7 @@ run: Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-compos
 	docker-compose -p $(PROJECT_NAME) up -d
 
 down: docker-compose.yaml ## 本地卸载,依赖docker-compose
-	docker-compose -p $(PROJECT_NAME) down $(SERVICE)
+	docker-compose -p $(PROJECT_NAME) down $(SERVICE_NAME)
 
 test: ## 运行测试用例
 	go test -race -cover -coverprofile=cover.out $$(go list ./...|grep -v cmd|grep -v 'protobuf/')
