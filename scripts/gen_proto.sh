@@ -98,10 +98,20 @@ fi
 
 clang_format=$(which clang-format)
 
+
 ## 清理生成的文件
 bash ${ROOTDIR}/clean_proto.sh
 
 cd $PROTO_DIR
+
+protoc_opt=''
+if [ -d ./third_party ];then
+    protoc_opt="${protoc_opt} -I./third_party"
+fi
+
+protoc_opt="${protoc_opt} -I."
+
+
 
 for file in $(find . -type f -name "*.proto" |grep -v 'third_party')
 do
@@ -109,7 +119,6 @@ do
         ${clang_format} -i $file
     fi
     protoc ${protoc_out} \
-        -I./third_party \
-        -I. \
+        ${protoc_opt} \
         $file
 done
