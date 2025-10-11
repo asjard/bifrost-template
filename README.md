@@ -34,8 +34,8 @@ Envs:
   GOOS                   运行环境,可选:linux,darwin,windows            默认: linux        当前: linux
   CGO_ENABLED            是否开启CGO,可选:0,1                          默认: 0            当前: 0
   BUILD_DIR              编译目录                                      默认: ./           当前: ./
-  DEPLOY_ENV             部署环境,可选:dev,sit,uat,pro                 默认: dev          当前: dev
-  SERVICE_NAME           服务名称                                      默认: bifrost      当前: bifrost
+  DEPLOY_ENV             部署环境,可选:dev,sit,uat,pro                  默认: dev          当前: dev
+  SERVICE                服务名称                                      默认: bifrost      当前: bifrost
 ```
 
 ## 环境变量定义
