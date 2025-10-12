@@ -109,7 +109,7 @@ if [ -d ./third_party ];then
     protoc_opt="${protoc_opt} -I./third_party"
 fi
 
-protoc_opt="${protoc_opt} -I."
+protoc_opt="${protoc_opt} -I. ${PROTOC_OPT}"
 
 
 

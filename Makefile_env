@@ -2,6 +2,8 @@
 BIFROST_DIR ?= .
 ##env proto协议文件目录,结尾不要有/
 PROTO_DIR ?= .
+##env protoc命令参数
+PROTOC_OPT ?=
 ##env 是否根据protobuf文件生成*.pb.go文件
 GEN_PROTO_GO ?= true
 ##env 生成的*.pb.go文件输出目录
