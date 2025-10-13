@@ -102,9 +102,9 @@ clang_format=$(which clang-format)
 ## 清理生成的文件
 bash ${ROOTDIR}/clean_proto.sh
 
-cd $PROTO_DIR/../
-
-proto_dir=$(basename $PROTO_DIR)
+cd $PROTO_DIR
+proto_dir=$(basename $PWD)
+cd ../
 
 protoc_opt="${PROTOC_OPT}"
 if [ -d ${proto_dir}/third_party ];then
