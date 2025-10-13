@@ -102,18 +102,20 @@ clang_format=$(which clang-format)
 ## 清理生成的文件
 bash ${ROOTDIR}/clean_proto.sh
 
-cd $PROTO_DIR
+cd $PROTO_DIR/../
 
-protoc_opt=''
-if [ -d ./third_party ];then
-    protoc_opt="${protoc_opt} -I./third_party"
+proto_dir=$(basename $PROTO_DIR)
+
+protoc_opt="${PROTOC_OPT}"
+if [ -d ${proto_dir}/third_party ];then
+    protoc_opt="${protoc_opt} -I./${proto_dir}/third_party"
 fi
 
-protoc_opt="${protoc_opt} -I. ${PROTOC_OPT}"
+protoc_opt="${protoc_opt} -I."
 
 
 
-for file in $(find . -type f -name "*.proto" |grep -v 'third_party')
+for file in $(find ${proto_dir} -type f -name "*.proto" |grep -v 'third_party')
 do
     if [ -n "$clang_format" ];then
         ${clang_format} -i $file
