@@ -106,7 +106,7 @@ cd $PROTO_DIR
 proto_dir=$(basename $PWD)
 cd ../
 
-protoc_opt="${PROTOC_OPT}"
+protoc_opt="-I/usr/local/include ${PROTOC_OPT}"
 if [ -d ${proto_dir}/third_party ];then
     protoc_opt="${protoc_opt} -I./${proto_dir}/third_party"
 fi

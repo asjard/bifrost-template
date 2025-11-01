@@ -9,7 +9,7 @@ if [ ! -d "${PROTO_DIR}/${GEN_PROTO_GO_OUT}" ];then
 fi
 
 cd ${PROTO_DIR}
-find . -type f -path '*/third_party/*' -prune -o -name "*.pb.go" -delete
+find . -depth -type f -path '*/third_party/*' -prune -o -name "*.pb.go" -delete
 
 cd -
 if [ ! -d "${PROTO_DIR}/${GEN_PROTO_TS_OUT}" ];then
@@ -17,6 +17,6 @@ if [ ! -d "${PROTO_DIR}/${GEN_PROTO_TS_OUT}" ];then
     exit 0
 fi
 cd ${PROTO_DIR}/${GEN_PROTO_TS_OUT}
-find . -type f -path '*/third_party/*' -prune -o -name "*.pb.ts" -delete
+find . -depth -type f -path '*/third_party/*' -prune -o -name "*.pb.ts" -delete
 
 #
