@@ -1,76 +1,76 @@
 -include $(BIFROST_DIR)/Makefile_base
 
-## bash命令
+## bash command
 BASH_CMD = bash
-## go buid命令
+## go build command
 GOBUILD_CMD = go build
 
-## 开启DEBUG
+## whether open debug
 ifeq ($(DEBUG),true)
     BASH_CMD = bash -x
     GOBUILD_CMD = go build -v
 endif
 
 .PHONY: build
-build: ## 编译
+build: ## Build
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
 
 .PHONY: gen_proto
-gen_proto: all_env $(BIFROST_DIR)/scripts/gen_proto.sh ## 生成协议文件
+gen_proto: all_env $(BIFROST_DIR)/scripts/gen_proto.sh ## Build protobuf
 	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/gen_proto.sh
 
 .PHONY: clean_proto
-clean_proto: $(BIFROST_DIR)/scripts/clean_proto.sh ## 清理proto协议生成的文件
+clean_proto: $(BIFROST_DIR)/scripts/clean_proto.sh ## Clean build protobuf generated code
 	$(ALL_ENV) $(BASH_CMD) $(BIFROST_DIR)/scripts/clean_proto.sh
 
 .PHONY: archive
-archive: ## 打包
+archive: ## Archive
 
 .PHONY: install
-install: all_env $(BIFROST_DIR)/01_install.yaml ## 安装
+install: all_env $(BIFROST_DIR)/01_install.yaml ## Install
 	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	01_install.yaml
 
 .PHONY: restart
-restart: all_env $(BIFROST_DIR)/02_restart.yaml ## 重启
+restart: all_env $(BIFROST_DIR)/02_restart.yaml ## Restart
 	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	02_resstart.yaml
 
 .PHONY: start
-start: all_env $(BIFROST_DIR)/03_start.yaml ## 启动
+start: all_env $(BIFROST_DIR)/03_start.yaml ## Start
 	ansible-playbook -\
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	03_start.yaml
 
 .PHONY: stop
-stop: all_env $(BIFROST_DIR)/04_stop.yaml ## 停止
+stop: all_env $(BIFROST_DIR)/04_stop.yaml ## Stop
 	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	04_stop.yaml
 
 .PHONY: uninstall
-uninstall: all_env $(BIFROST_DIR)/05_uninstall.yaml ## 卸载
+uninstall: all_env $(BIFROST_DIR)/05_uninstall.yaml ## Uninstall
 	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	05_uninstall.yaml
 
 .PHONY: run
-run: Dockerfile docker-compose.yaml ## 本地运行,依赖docker和docker-compose
+run: Dockerfile docker-compose.yaml ## Run with docker-compose
 	docker-compose -p $(PROJECT_NAME) build
 	docker-compose -p $(PROJECT_NAME) up -d
 
 .PHONY: down
-down: docker-compose.yaml ## 本地卸载,依赖docker-compose
+down: docker-compose.yaml ## Uninstall local run
 	docker-compose -p $(PROJECT_NAME) down $(SERVICE_NAME)
 
 .PHONY: test
-test: ## 运行测试用例
+test: ## Run unit test
 	go test -race -cover -coverprofile=cover.out $$(go list ./...|grep -v cmd|grep -v 'protobuf/')
 	# go tool cover -html=cover.out
