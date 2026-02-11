@@ -13,7 +13,7 @@ endif
 
 .PHONY: build
 build: ## Build
-	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=amd64 $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
+	CGO_ENABLED=$(CGO_ENABLED) GOOS=$(GOOS) GOARCH=$(GOARCH) $(GOBUILD_CMD) -ldflags "-s -w" -o bin/$(SERVICE_NAME) $(BUILD_DIR)
 
 .PHONY: gen_proto
 gen_proto: all_env $(BIFROST_DIR)/scripts/gen_proto.sh ## Build protobuf
@@ -38,11 +38,11 @@ restart: all_env $(BIFROST_DIR)/02_restart.yaml ## Restart
 	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
-	02_resstart.yaml
+	02_restart.yaml
 
 .PHONY: start
 start: all_env $(BIFROST_DIR)/03_start.yaml ## Start
-	ansible-playbook -\
+	ansible-playbook \
 	-e '$(ALL_ENV)' \
 	-i $(BIFROST_DIR)/inventory.ini \
 	03_start.yaml

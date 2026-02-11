@@ -51,6 +51,8 @@ GEN_PROTO_GO_VALIDATE_OPT ?=
 
 ##env OS environment, options: linux, darwin, windows
 GOOS ?= linux
+##env CPU architecture, options: amd64, arm64
+GOARCH ?= amd64
 ##env Whether to enable CGO, options: 0, 1
 CGO_ENABLED ?= 0
 ##env Build directory
