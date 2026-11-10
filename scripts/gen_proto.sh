@@ -56,8 +56,13 @@ go_rest_gw_out() {
     [[ "$protoc_out" =~ "--go-rest2grpc-gw_out=" ]] || protoc_out="$protoc_out --go-rest2grpc-gw_out=${GEN_PROTO_GO_OUT} --go-rest2grpc-gw_opt=${GEN_PROTO_GO_REST_GW_OPT}"
 }
 
-go_mcp2grpc_out() {
+go_mcp_out() {
     go_grpc_out
+    [[ "$protoc_out" =~ "--go-mcp_out=" ]] || protoc_out="$protoc_out --go-mcp_out=${GEN_PROTO_GO_OUT} --go-mcp_opt=${GEN_PROTO_GO_MCP_OPT}"
+}
+
+go_mcp2grpc_out() {
+    go_mcp_out
     [[ "$protoc_out" =~ "--go-mcp2grpc_out=" ]] || protoc_out="$protoc_out --go-mcp2grpc_out=${GEN_PROTO_GO_OUT} --go-mcp2grpc_opt=${GEN_PROTO_GO_MCP2GRPC_OPT}"
 }
 
@@ -87,6 +92,10 @@ fi
 
 if [ "$GEN_PROTO_GO_REST_GW" == "true" ];then
     go_rest_gw_out
+fi
+
+if [ "$GEN_PROTO_GO_MCP" == "true" ];then
+    go_mcp_out
 fi
 
 if [ "$GEN_PROTO_GO_MCP2GRPC" == "true" ];then

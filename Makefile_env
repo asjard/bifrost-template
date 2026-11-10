@@ -22,6 +22,10 @@ GEN_PROTO_GO_REST_OPT ?=
 GEN_PROTO_GO_REST_GW ?= true
 ##env Options for generating *_rest_gw.pb.go files
 GEN_PROTO_GO_REST_GW_OPT ?=
+##env Whether to generate *_mcp.pb.go files from protobuf files
+GEN_PROTO_GO_MCP ?= false
+##env Options for generating *_mcp.pb.go files
+GEN_PROTO_GO_MCP_OPT ?=
 ##env Whether to generate *_mcp_gw.pb.go files from protobuf files
 GEN_PROTO_GO_MCP2GRPC ?= false
 ##env Options for generating *_mcp_gw.pb.go files
